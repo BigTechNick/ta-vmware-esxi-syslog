@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "2.0.0",
+  "info": {
+    "title": "VMware ESXi Syslog Fields and CIM Add-on",
+    "id": {
+      "group": null,
+      "name": "TA-vmware-esxi-syslog",
+      "version": "1.0.0"
+    },
+    "author": [
+      {
+        "name": "Nikhil Chawla",
+        "email": null,
+        "company": null
+      }
+    ],
+    "releaseDate": null,
+    "description": "Search-time fields and CIM mappings for VMware ESXi syslog (vmware:esxlog:<process>): Authentication, Change, Alerts and Web, plus field parsing for more than 100 ESXi processes. Independent project, not affiliated with or endorsed by Broadcom or VMware.",
+    "classification": {
+      "intendedAudience": "Security",
+      "categories": [
+        "Security, Fraud & Compliance",
+        "IT Operations"
+      ],
+      "developmentStatus": "Production/Stable"
+    },
+    "commonInformationModels": null,
+    "license": {
+      "name": "Apache-2.0",
+      "text": "LICENSE",
+      "uri": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "privacyPolicy": {
+      "name": null,
+      "text": null,
+      "uri": null
+    },
+    "releaseNotes": {
+      "name": "README",
+      "text": "README.md",
+      "uri": null
+    }
+  },
+  "dependencies": null,
+  "tasks": null,
+  "inputGroups": null,
+  "incompatibleApps": null,
+  "platformRequirements": null,
+  "supportedDeployments": [
+    "_standalone",
+    "_distributed"
+  ],
+  "targetWorkloads": [
+    "_search_heads"
+  ]
+}
