@@ -263,6 +263,10 @@ t("esxi_ism",
   "Dell iDRAC Service Module event")
 t("esxi_ssl_conn_error", r"SSL Connection error (?<ssl_error_code>\d+) : (?<ssl_error>.+?)(?:#000)*$",
   "SSL connection error")
+t("esxi_omsa",
+  r"Server_Administrator: \d+ (?<omsa_event_id>\d+) - (?<omsa_service>.+?)  (?<omsa_message>.+?)"
+  r"(?:\.:\s+(?<omsa_object>.+?))?(?:#000)*$",
+  "Dell OpenManage Server Administrator: <n> <event ID> - <service>  <message>.:  <object>")
 t("esxi_watchdog_started", r"Started (?<service>\S+) with PID=(?<service_pid>\d+)", "Watchdog started a service")
 t("esxi_watchdog_restart", r"watchdog\[\d+\]: Restarting (?<service>\S+)", "Watchdog restarting a service")
 
@@ -324,6 +328,10 @@ EXTRA = {
     "ConfigStore": ["esxi_return_code"],
     "watchdog": ["esxi_watchdog_started", "esxi_watchdog_restart"],
     "smartd": ["esxi_device"],
+    # Dell OpenManage Server Administrator (process "Server_Administrator"). The usual sourcetype
+    # rule stops at the underscore, so it arrives as vmware:esxlog:Server.
+    "Server": ["esxi_omsa"],
+    "Server_Administrator": ["esxi_omsa"],
 }
 
 # Other ESXi processes seen in the field or listed for the Splunk Add-on for VMware ESXi Logs.

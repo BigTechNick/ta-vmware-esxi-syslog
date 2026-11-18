@@ -1,6 +1,6 @@
 # VMware ESXi Syslog Fields and CIM Add-on
 
-Splunk add-on `TA-vmware-esxi-syslog`, version 1.0.0.
+Splunk add-on `TA-vmware-esxi-syslog`, version 1.0.1.
 
 Search-time fields and CIM mappings for VMware ESXi syslog (sourcetypes `vmware:esxlog:<process>`): Authentication for host agent, SSH and DCUI logins, Change for vSphere tasks and host audit records, Alerts for host problems and account lockouts, and Web for remote requests to the host. Also parses the header, Originator block and messages of more than 100 ESXi processes. Not affiliated with Broadcom or VMware.
 

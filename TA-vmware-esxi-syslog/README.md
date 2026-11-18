@@ -1,6 +1,6 @@
 # VMware ESXi Syslog Fields and CIM Add-on
 
-Version 1.0.0. App ID (folder name): `TA-vmware-esxi-syslog`.
+Version 1.0.1. App ID (folder name): `TA-vmware-esxi-syslog`.
 
 Search-time fields and CIM mappings for VMware ESXi syslog, for Splunk Enterprise
 Security and everyday searching. It works on the per-process sourcetypes
@@ -147,7 +147,7 @@ not tagged.
 | `clusterAgent`, `etcd` | `cluster_agent_message`, `cluster_agent_type`, `cluster_agent_error`, `etcd_response_type`, `etcd_error` |
 | `esxupdate`, `ImageConfigManager` | `vib_id`, `vib_error`, `esxupdate_module`, `icm_logger` |
 | `lwsmd` (Active Directory) | `ad_domain`, `ad_dc`, `ad_dc_ip`, `ad_error`, `lwsmd_component` |
-| others | `heartbeat` (`uptime`, `vm_count`), `esxtokend` (`token_issuer`, `user`), `vmauthd`/`nfcd` (`src`), `sfcb-dcism` (`ism_*`), `Host Profiles`, `ucs-tool-*`, `settingsd`, `scvmclient` (`log_level`, `command`) |
+| others | `heartbeat` (`uptime`, `vm_count`), `esxtokend` (`token_issuer`, `user`), `vmauthd`/`nfcd` (`src`), `sfcb-dcism` (`ism_*`), Dell OpenManage `Server_Administrator` (`omsa_*`), `Host Profiles`, `ucs-tool-*`, `settingsd`, `scvmclient` (`log_level`, `command`) |
 
 ## Event types and tags
 
@@ -188,6 +188,12 @@ index=<esxi index> sourcetype="vmware:esxlog:*" earliest=-4h
 ```
 
 ## Release notes
+
+### 1.0.1
+
+* Parses Dell OpenManage Server Administrator messages (process `Server_Administrator`), which the
+  usual sourcetype rule names `vmware:esxlog:Server`: `omsa_event_id`, `omsa_service`,
+  `omsa_message`, `omsa_object`, plus the common fields.
 
 ### 1.0.0
 
