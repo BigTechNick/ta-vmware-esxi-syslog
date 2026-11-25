@@ -1,6 +1,6 @@
 # VMware ESXi Syslog Fields and CIM Add-on
 
-Version 1.0.1. App ID (folder name): `TA-vmware-esxi-syslog`.
+Version 1.0.2. App ID (folder name): `TA-vmware-esxi-syslog`.
 
 Search-time fields and CIM mappings for VMware ESXi syslog, for Splunk Enterprise
 Security and everyday searching. It works on the per-process sourcetypes
@@ -127,11 +127,15 @@ account records `account`.
 
 ## Web
 
-`envoy-access` (the host's reverse proxy) requests from other machines: `http_method`,
+`envoy-access` (the host's reverse proxy) requests from other machines: `action`, `http_method`,
 `uri_path`, `uri_query`, `url`, `status`, `bytes_in`, `bytes_out`, `bytes`, `duration`
 (ms), `src`, `src_port`, `dest_ip`, `dest_port`, `tls_version`, `http_version`,
 `soap_action`, `esxi_opid`. Requests from the host to itself (`127.0.0.1`) are parsed but
 not tagged.
+
+`action` is `blocked` when the request was refused: HTTP 401, 403 or 407, or Envoy's
+external authorization or rate limit rejection (response flags `UAEX`, `RL`). Every other request
+is `allowed`: the proxy passed it on, and a 5xx is a server error, not a block.
 
 ## Other fields
 
@@ -188,6 +192,11 @@ index=<esxi index> sourcetype="vmware:esxlog:*" earliest=-4h
 ```
 
 ## Release notes
+
+### 1.0.2
+
+* Web: `envoy-access` requests now have the CIM `action` (`allowed`, or `blocked` for HTTP 401 / 403 /
+  407 and Envoy's `UAEX` / `RL` rejections). Before, `action` was empty on every Web event.
 
 ### 1.0.1
 

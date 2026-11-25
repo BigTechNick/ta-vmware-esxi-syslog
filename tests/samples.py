@@ -250,7 +250,33 @@ SAMPLES = [
      {"http_method": "POST", "uri_path": "/hgw/host-69/vpxa", "url": "/hgw/host-69/vpxa", "status": "200",
       "bytes_in": "1050", "bytes_out": "516", "bytes": "1566", "duration": "1", "src": "192.0.2.10",
       "src_port": "35204", "dest_ip": "198.51.100.12", "dest_port": "443", "tls_version": "TLSv1.2",
-      "esxi_opid": "HB-host-69@1052683-4cd1128d", "soap_action": "GetChangesVpxa", "dest": "esxi01.example.com"},
+      "esxi_opid": "HB-host-69@1052683-4cd1128d", "soap_action": "GetChangesVpxa", "dest": "esxi01.example.com",
+      "action": "allowed"},
+     ["web"]),
+    (ST + "envoy-access",
+     C + "envoy-access[2098751]: GET /sdk 500 via_upstream - 0 87 - 3 3 0 192.0.2.11:41200 HTTP/1.1 TLSv1.3 "
+         "198.51.100.12:443 127.0.0.1:17970 HTTP/1.1 - 127.0.0.1:8307 - -",
+     {"status": "500", "envoy_response_flags": "-", "action": "allowed"},
+     ["web"]),
+    (ST + "envoy-access",
+     C + "envoy-access[2098752]: GET /ui/ 403 ext_authz_denied UAEX 0 0 - 0 - 0 192.0.2.12:41201 HTTP/1.1 TLSv1.3 "
+         "198.51.100.12:443 - - - - -",
+     {"status": "403", "envoy_response_flags": "UAEX", "action": "blocked"},
+     ["web"]),
+    (ST + "envoy-access",
+     C + "envoy-access[2098753]: POST /sdk 429 local_rate_limited RL 0 18 - 0 - 0 192.0.2.13:41202 HTTP/1.1 TLSv1.3 "
+         "198.51.100.12:443 - - - - -",
+     {"status": "429", "envoy_response_flags": "RL", "action": "blocked"},
+     ["web"]),
+    (ST + "envoy-access",
+     C + "envoy-access[2098754]: GET /folder 401 via_upstream - 0 0 - 1 1 0 192.0.2.14:41203 HTTP/1.1 TLSv1.3 "
+         "198.51.100.12:443 127.0.0.1:17971 HTTP/1.1 - 127.0.0.1:8307 - -",
+     {"status": "401", "action": "blocked"},
+     ["web"]),
+    (ST + "envoy-access",
+     C + "envoy-access[2098755]: GET /ws 101 via_upstream DC 0 0 - 5000 - 0 192.0.2.15:41204 HTTP/1.1 TLSv1.3 "
+         "198.51.100.12:443 127.0.0.1:17972 HTTP/1.1 - 127.0.0.1:8307 - -",
+     {"status": "101", "envoy_response_flags": "DC", "action": "allowed"},
      ["web"]),
     (ST + "envoy-access",
      C + "envoy-access[2098759]: GET /sdk/service?x=1 200 via_upstream - 0 118 - 0 0 0 127.0.0.1:33937 HTTP/1.1 - "

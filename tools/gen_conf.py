@@ -451,6 +451,11 @@ VOBD_EVAL = {
     "type": 'if(match(vob_id, "' + VOB_ALERT + '"), "alarm", null())',
 }
 ENVOY_ACCESS_EVAL = {
+    # CIM Web action: blocked when the request was refused (401 / 403 / 407, or Envoy's external
+    # authorization / rate limit rejection flags UAEX / RL), otherwise allowed (the proxy passed it
+    # on; a 5xx is a server error, not a block)
+    "action": 'case(in(status, "401", "403", "407") OR match(envoy_response_flags, "(^|,)(UAEX|RL)(,|$)"), "blocked", '
+              'isnotnull(status), "allowed")',
     "bytes": "bytes_in + bytes_out",
     "url": "uri_path",
     "tls_version": 'if(tls_version=="-", null(), tls_version)',

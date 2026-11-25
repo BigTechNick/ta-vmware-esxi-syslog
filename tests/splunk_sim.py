@@ -319,6 +319,14 @@ class Parser:
                         return v
                 return None
             return f
+        if n == "in":
+            if len(args) < 2:
+                raise EvalError("in() takes a value and at least one candidate")
+
+            def f():
+                v = args[0]()
+                return v is not None and _str(v) in [_str(a()) for a in args[1:]]
+            return f
         if n == "isnull":
             need(1)
             return lambda: args[0]() is None
